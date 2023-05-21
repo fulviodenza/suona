@@ -1,6 +1,5 @@
 use mp3_duration;
 use sdl2::audio::{AudioCallback, AudioSpecDesired};
-use sdl2::sys::_Float32;
 use std::fs::File;
 use std::path::Path;
 use std::time::Duration;
