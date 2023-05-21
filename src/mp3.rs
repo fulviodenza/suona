@@ -1,5 +1,6 @@
 use mp3_duration;
 use sdl2::audio::{AudioCallback, AudioSpecDesired};
+use sdl2::sys::_Float32;
 use std::fs::File;
 use std::path::Path;
 use std::time::Duration;
@@ -55,9 +56,20 @@ fn run_sound() {
 }
 
 #[allow(dead_code)]
-pub fn get_mp3_duration(mp3_file: &str) {
+pub fn get_mp3_duration(mp3_file: &str) -> Duration {
     let path = Path::new(mp3_file);
     let file = File::open(path).unwrap();
     let duration = mp3_duration::from_file(&file).unwrap();
-    println!("File duration: {:?}", duration);
+    duration
+}
+
+pub struct Audio {
+    pub duration: Duration,
+}
+
+pub fn init_audio(mp3_file: &str) -> Audio {
+    let a = Audio {
+        duration: get_mp3_duration(mp3_file),
+    };
+    a
 }
